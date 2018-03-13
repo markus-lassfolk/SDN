@@ -300,8 +300,11 @@ function importServiceTemplate
 	Set-SCPackageMapping -PackageMapping $mapping -TargetObject $resource
 	
 	#MAP NCsetup.cr
-	$VMMLibrary = $node.VMMLibrary
+	#$VMMLibrary = $node.VMMLibrary
+	$VMMLibrary = Get-SCLibraryShare | where LibraryServer -eq $resource.LibraryServer | where Path -eq $resource.Directory
 	#$VMMLibrary = Get-SCLibraryShare
+	#MAP NCsetup.cr
+
 	$NCsetupPath = $serviceTemplateLocation + "NCSetup.cr\"
 	Import-SCLibraryPhysicalResource -SourcePath $NCsetupPath -SharePath $VMMLibrary -OverwriteExistingFiles
 	
